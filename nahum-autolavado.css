@@ -1,0 +1,285 @@
+/* =================================================================
+   SPRINT 2: CSS3, FLEXBOX Y RESPONSIVE
+   Tema: Autolavado Detailing (estilo oscuro premium + dorado)
+   1. Paleta personalizada en :root
+   2. Flexbox para alinear campos, opciones y botones
+   3. @media (max-width: 600px) al final
+================================================================== */
+
+/* Fuentes (si no cargan, se usan las de respaldo) */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --color-fondo: #08080a;
+  --color-tarjeta: #111114;
+  --color-superficie: #17171b;
+  --color-primario: #b8924f;          /* dorado */
+  --color-primario-hover: #d1a85f;
+  --color-texto: #f5f5f4;
+  --color-texto-suave: #a1a1aa;
+  --color-borde: #2a2a30;
+  --color-error: #f87171;
+
+  --fuente-titulos: "Bebas Neue", "Oswald", Impact, sans-serif;
+  --fuente-texto: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente-texto);
+  background-color: var(--color-fondo);
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgba(184, 146, 79, 0.18), transparent 55%),
+    radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, 0.05), transparent 50%);
+  background-attachment: fixed;
+  color: var(--color-texto);
+  min-height: 100vh;
+  padding: 1.5rem;
+  line-height: 1.5;
+}
+
+/* ---------- Barra superior ---------- */
+.barra-volver {
+  max-width: 760px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.barra-volver a {
+  color: var(--color-texto);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.barra-volver a:hover {
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+
+/* ---------- Tarjeta principal ---------- */
+.contenedor {
+  max-width: 760px;
+  margin: 0 auto;
+  background-color: var(--color-tarjeta);
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--color-borde);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+h1 {
+  font-family: var(--fuente-titulos);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* Frase dorada pequeña encima del título */
+h1::before {
+  content: "Premium car care. Impeccable results.";
+  display: block;
+  font-family: var(--fuente-texto);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  color: var(--color-primario);
+  margin-bottom: 0.75rem;
+}
+
+.contenedor > p {
+  color: var(--color-texto-suave);
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+/* ---------- Formulario con Flexbox ---------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.grupo-campos {
+  border: 1px solid var(--color-borde);
+  border-radius: 14px;
+  padding: 1.25rem;
+  background-color: rgba(255, 255, 255, 0.015);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+legend {
+  font-family: var(--fuente-titulos);
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 0.6rem;
+  color: var(--color-primario);
+}
+
+/* Cada campo u opción se reparte el ancho y se acomoda solo */
+.grupo-campos > .campo,
+.grupo-campos > .opcion-linea {
+  flex: 1 1 260px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.campo label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  font-family: inherit;
+  padding: 0.8rem 0.9rem;
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder {
+  color: #5f5f68;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(184, 146, 79, 0.25);
+}
+
+/* Opciones (radio y checkbox) como tarjetas */
+.opcion-linea {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.opcion-linea:hover {
+  border-color: var(--color-primario);
+  transform: translateY(-2px);
+}
+
+.opcion-linea input {
+  accent-color: var(--color-primario);
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
+}
+
+/* Opción seleccionada resaltada en dorado */
+.opcion-linea:has(input:checked) {
+  border-color: var(--color-primario);
+  background-color: rgba(184, 146, 79, 0.12);
+}
+
+/* ---------- Botón y resultado (se usan en el Sprint 3) ---------- */
+.btn-principal {
+  font-family: inherit;
+  background-color: var(--color-primario);
+  color: #0a0a0a;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-principal:hover {
+  background-color: var(--color-primario-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(184, 146, 79, 0.35);
+}
+
+.resultado {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 14px;
+  background-color: rgba(184, 146, 79, 0.1);
+  border: 1px solid var(--color-primario);
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.resultado.error {
+  background-color: rgba(248, 113, 113, 0.1);
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+/* =================================================================
+   DISEÑO RESPONSIVE (Móviles menores a 600px)
+================================================================== */
+@media (max-width: 600px) {
+  body {
+    padding: 0.75rem;
+  }
+
+  .contenedor {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  .grupo-campos {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .grupo-campos > .campo,
+  .grupo-campos > .opcion-linea {
+    flex: 1 1 auto;
+  }
+
+  .btn-principal {
+    width: 100%;
+    align-self: stretch;
+  }
+}
