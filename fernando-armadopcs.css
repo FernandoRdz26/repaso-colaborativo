@@ -27,17 +27,17 @@ body {
   padding: 1.5rem;
   line-height: 1.5;
   display: flex;
-  flex-direction:row;
+  flex-direction: column;
   gap: 10px;
 }
 .imagenes{display:flex; flex-direction: column; align-items: center; justify-content:center;
           gap: 15px; position:relative; left:70px;}
 .imagenes img{width: 350px; height: auto; border-radius: 8px;}
+.maincontenedor{display:flex;}
 
 .barra-volver {
   max-width: 700px;
   margin: 0 auto 1rem;
-  position: absolute; top: 0;
 }
 
 .barra-volver a {
@@ -142,8 +142,6 @@ select {
 @media (max-width: 768px) {
   body {
     padding: 0.75rem;
-    flex-direction: column;
-    
 
   }
 
@@ -151,6 +149,9 @@ select {
     padding: 1.25rem;}
 
   .imagenes{display:none}
+
+  .maincontenedor{display:flex; flex-direction: column;;
+         position:relative; left:20px;}
 
   .btn-principal {
     width: 100%;
