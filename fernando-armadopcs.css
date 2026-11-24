@@ -31,8 +31,8 @@ body {
   gap: 10px;
 }
 .imagenes{display:flex; flex-direction: column; align-items: center; justify-content:center;
-          gap: 15px; position:relative; left:150px;}
-.imagenes img{width: 300px; height: auto; border-radius: 8px;}
+          gap: 15px; position:relative; left:70px;}
+.imagenes img{width: 350px; height: auto; border-radius: 8px;}
 
 .barra-volver {
   max-width: 700px;
@@ -139,15 +139,16 @@ select {
 /* =================================================================
    DISEÑO RESPONSIVE (Móviles menores a 600px)
 ================================================================== */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   body {
     padding: 0.75rem;
+    flex-direction: column;
+    
+
   }
 
   .contenedor {
-    padding: 1.25rem;
-    width: 300px;
-  }
+    padding: 1.25rem;}
 
   .imagenes{display:none}
 
